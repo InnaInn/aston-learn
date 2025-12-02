@@ -1,11 +1,11 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 function Modal({ isOpen, onClose, children }: ModalProps) {
@@ -15,11 +15,22 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         {children}
-        <button className={styles.closeBtn} onClick={onClose}>Закрыть</button>
       </div>
     </div>,
     document.body
   );
 }
+
+Modal.Header = function ModalHeader({ children }: { children: ReactNode }) {
+  return <div className={styles.header}>{children}</div>;
+};
+
+Modal.Body = function ModalBody({ children }: { children: ReactNode }) {
+  return <div className={styles.body}>{children}</div>;
+};
+
+Modal.Footer = function ModalFooter({ children }: { children: ReactNode }) {
+  return <div className={styles.footer}>{children}</div>;
+};
 
 export default Modal;
