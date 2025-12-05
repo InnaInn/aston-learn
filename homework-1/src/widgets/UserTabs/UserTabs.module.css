@@ -1,0 +1,18 @@
+.userTabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  text-decoration: none;
+  color: gray;
+  padding: 8px 12px;
+  transition: color 0.2s ease;
+}
+
+.active {
+  font-weight: bold;
+  color: blue;
+  border-bottom: 2px solid blue;
+}
