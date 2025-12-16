@@ -1,46 +1,41 @@
 import { useState, useEffect } from 'react';
 
-type Comment = { id: number; text: string };
-export type Post = { id: string; title: string; description: string; comments: Comment[] };
+export type Post = {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+};
 
 const usePosts = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        async function fetchPosts() {
-            try {
-                setLoading(true);
-                setError(null);
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        setLoading(true);
+        setError(null);
 
-                const response = await new Promise<Post[]>((resolve) =>
-                    setTimeout(
-                        () =>
-                            resolve([
-                                {
-                                    id: '1',
-                                    title: 'Пример поста',
-                                    description: 'Описание поста',
-                                    comments: [{ id: 1, text: 'Комментарий' }],
-                                },
-                            ]),
-                        1000
-                    )
-                );
-
-                setPosts(response);
-            } catch (err) {
-                setError('Ошибка загрузки постов');
-            } finally {
-                setLoading(false);
-            }
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (!response.ok) {
+          throw new Error('Ошибка загрузки постов');
         }
 
-        fetchPosts();
-    }, []);
+        const data: Post[] = await response.json();
+        setPosts(data);
+      } catch (err) {
+        setError('Ошибка загрузки постов');
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    return { posts, loading, error };
+    fetchPosts();
+  }, []);
+
+  return { posts, loading, error };
 };
 
 export default usePosts;

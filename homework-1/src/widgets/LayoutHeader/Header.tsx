@@ -4,22 +4,31 @@ import { useTheme } from '../../shared/lib/theme/useTheme';
 import Button from '../../shared/ui/Button';
 import Modal from '../../shared/ui/Modal';
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+
+  const getClassName = ({ isActive }: { isActive: boolean }) =>
+    isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
 
   return (
     <div className={`${styles.header} ${theme}`}>
       <div className={styles.left}>
         <h1>My blog</h1>
       </div>
-
+      <div className={styles.center}>
+        <nav className={styles.nav}>
+          <NavLink to="/posts" className={getClassName}>
+            Все посты
+          </NavLink>
+        </nav>
+      </div>
       <div className={styles.right}>
         <ThemeSwitcher />
         <Button onClick={() => setIsOpen(true)}>О проекте</Button>
       </div>
-
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Header>О проекте</Modal.Header>
         <Modal.Body>
@@ -33,4 +42,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Header

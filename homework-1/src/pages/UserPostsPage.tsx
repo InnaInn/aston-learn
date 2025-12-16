@@ -1,13 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetPostsByUserQuery } from '../entities/posts/api/postsApi';
+import { useGetUserByIdQuery } from '../entities/users/api/usersApi';
 import UserTabs from '../widgets/UserTabs/UserTabs';
+import PostCard from '../entities/post/ui/PostCard';
+import PostLengthFilter from '../features/PostLengthFilter/ui/PostLengthFilter';
+import styles from './UserPostsPage.module.css';
 
 function UserPostsPage() {
-  const { id } = useParams();
+  const { userId } = useParams<{ userId: string }>();
+  const { data: posts = [], isLoading, error } = useGetPostsByUserQuery(Number(userId));
+  const { data: user, isLoading: userLoading } = useGetUserByIdQuery(Number(userId));
+
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+
+  useEffect(() => {
+    if (posts) {
+      setFilteredPosts(posts);
+    }
+  }, [posts]);
+
+  if (isLoading || userLoading) {
+    return <p>Загрузка...</p>;
+  }
+
+  if (error) {
+    return <p>Ошибка при загрузке постов</p>;
+  }
+
   return (
-    <div>
-      <h2>Посты пользователя {id}</h2>
-      <UserTabs />
+    <div className={styles.container}>
+      <h2>
+        Посты пользователя {user ? `${user.name} (${user.username})` : userId}
+      </h2>
+      <UserTabs userId={Number(userId)} />
+      
+      {posts.length > 0 && (
+        <PostLengthFilter
+          posts={posts}
+          onFilter={(filtered) => setFilteredPosts(filtered)}
+        />
+      )}
+
+      <div>
+        {filteredPosts.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ))}
+      </div>
     </div>
   );
 }
