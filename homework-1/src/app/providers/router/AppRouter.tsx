@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import PostsPage from '../../../pages/PostsPage';
 import PostDetailPage from '../../../pages/PostDetailPage';
 import UserAlbumsPage from '../../../pages/UserAlbumsPage';
@@ -8,16 +8,15 @@ import UserPostsPage from '../../../pages/UserPostsPage';
 
 function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/posts" element={<PostsPage />} />
-        <Route path="/posts/:id" element={<PostDetailPage />} />
-        <Route path="/users/:id/albums" element={<UserAlbumsPage />} />
-        <Route path="/albums/:id/photos" element={<AlbumPhotosPage />} />
-        <Route path="/users/:id/todos" element={<UserTodosPage />} />
-        <Route path="/users/:id/posts" element={<UserPostsPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<PostsPage />} />
+      <Route path="/posts" element={<PostsPage />} />
+      <Route path="/posts/:id" element={<PostDetailPage />} />
+      <Route path="/users/:userId/albums" element={<UserAlbumsPage />} />
+      <Route path="/users/:userId/albums/:albumId/photos" element={<AlbumPhotosPage />} />
+      <Route path="/users/:userId/todos" element={<UserTodosPage />} />
+      <Route path="/users/:userId/posts" element={<UserPostsPage />} />
+    </Routes>
   );
 }
 
