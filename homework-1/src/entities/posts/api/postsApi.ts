@@ -1,11 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-export type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-};
+import type { Post } from '../model/types'; 
 
 const postsApi = createApi({
   reducerPath: 'postsApi',
@@ -17,9 +11,9 @@ const postsApi = createApi({
       providesTags: (result) =>
         result
           ? [
-            ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
-            { type: 'Posts', id: 'LIST' },
-          ]
+              ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
+              { type: 'Posts', id: 'LIST' },
+            ]
           : [{ type: 'Posts', id: 'LIST' }],
     }),
 
@@ -33,9 +27,9 @@ const postsApi = createApi({
       providesTags: (result, error, userId) =>
         result
           ? [
-            ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
-            { type: 'Posts', id: `USER-${userId}` },
-          ]
+              ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
+              { type: 'Posts', id: `USER-${userId}` },
+            ]
           : [{ type: 'Posts', id: `USER-${userId}` }],
     }),
 

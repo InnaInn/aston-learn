@@ -1,5 +1,5 @@
 import styles from './PostCard.module.css';
-import type { Post } from '../../posts/api/postsApi';
+import type { Post } from '../../../entities/posts/model/types';
 import CommentList from '../../../widgets/CommentList/ui/CommentList';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
