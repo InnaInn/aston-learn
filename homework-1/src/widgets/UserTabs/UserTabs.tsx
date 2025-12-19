@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './UserTabs.module.css';
+import type { ReactElement } from 'react';
 
 type UserTabsProps = {
   userId: number;
 };
 
-function UserTabs({ userId }: UserTabsProps) {
-  const getClassName = ({ isActive }: { isActive: boolean }) =>
+function UserTabs({ userId }: UserTabsProps): ReactElement {
+  const getClassName = ({ isActive }: { isActive: boolean }): string =>
     isActive ? `${styles.tab} ${styles.active}` : styles.tab;
 
   return (
@@ -25,4 +26,4 @@ function UserTabs({ userId }: UserTabsProps) {
   );
 }
 
-export default UserTabs
+export default UserTabs;

@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
+import type { Post } from '../../../../entities/posts/model/types';
 
-export type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-};
 
 const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);

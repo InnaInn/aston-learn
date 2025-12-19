@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetPostsByUserQuery } from '../entities/posts/api/postsApi';
 import { useGetUserByIdQuery } from '../entities/users/api/usersApi';
@@ -6,13 +7,15 @@ import UserTabs from '../widgets/UserTabs/UserTabs';
 import PostCard from '../entities/post/ui/PostCard';
 import PostLengthFilter from '../features/PostLengthFilter/ui/PostLengthFilter';
 import styles from './UserPostsPage.module.css';
+import type { Post } from '../entities/posts/model/types';
+import type { User } from '../entities/users/model/types';
 
-function UserPostsPage() {
+function UserPostsPage(): ReactElement {
   const { userId } = useParams<{ userId: string }>();
   const { data: posts = [], isLoading, error } = useGetPostsByUserQuery(Number(userId));
   const { data: user, isLoading: userLoading } = useGetUserByIdQuery(Number(userId));
 
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     if (posts) {
@@ -31,7 +34,7 @@ function UserPostsPage() {
   return (
     <div className={styles.container}>
       <h2>
-        Посты пользователя {user ? `${user.name} (${user.username})` : userId}
+        Посты пользователя {user ? `${(user as User).name} (${(user as User).username})` : userId}
       </h2>
       <UserTabs userId={Number(userId)} />
       
@@ -43,7 +46,7 @@ function UserPostsPage() {
       )}
 
       <div>
-        {filteredPosts.map((post) => (
+        {filteredPosts.map((post: Post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>

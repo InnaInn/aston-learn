@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
+import type { MouseEventHandler } from 'react';
 import styles from './PostLengthFilter.module.css';
-
-type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-};
+import type { Post } from '../../../entities/posts/model/types';
 
 type Props = {
   posts: Post[];
@@ -16,10 +11,10 @@ type Props = {
 function PostLengthFilter({ posts, onFilter }: Props) {
   const [isFiltered, setIsFiltered] = useState(false);
 
-  const handleToggle = () => {
+  const handleToggle: MouseEventHandler<HTMLButtonElement> = () => {
     if (!isFiltered) {
       const filtered = posts.filter((p) => p.title.length >= 30);
-      console.log("Фильтр (>= 10 символов):", filtered.map((p) => p.title));
+      console.log("Фильтр (>= 30 символов):", filtered.map((p) => p.title));
       onFilter(filtered);
     } else {
       console.log("Возврат к исходному списку");
@@ -33,7 +28,7 @@ function PostLengthFilter({ posts, onFilter }: Props) {
       <button className={styles.filterButton} onClick={handleToggle}>
         {isFiltered
           ? "Показать все посты"
-          : "Фильтр: длинный заголовок (больше 10 символов)"}
+          : "Фильтр: длинный заголовок (больше 30 символов)"}
       </button>
     </div>
   );

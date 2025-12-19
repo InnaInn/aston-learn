@@ -1,22 +1,22 @@
 import { createContext, useState } from 'react';
+import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 
+export type Theme = 'light' | 'dark';
 
-type Theme = 'light' | 'dark';
-
-type ThemeContextValue = {
+export type ThemeContextValue = {
   theme: Theme;
   toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue>({
   theme: 'light',
-  toggleTheme: () => { },
+  toggleTheme: () => {},
 });
 
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+function ThemeProvider({ children }: PropsWithChildren<{ children?: ReactNode }>): ReactElement {
   const [theme, setTheme] = useState<Theme>('light');
 
-  function toggleTheme() {
+  function toggleTheme(): void {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   }
 

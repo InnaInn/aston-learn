@@ -5,12 +5,13 @@ import Button from '../../shared/ui/Button';
 import Modal from '../../shared/ui/Modal';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import type { ReactElement } from 'react';
 
-function Header() {
+function Header(): ReactElement {
   const { theme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const getClassName = ({ isActive }: { isActive: boolean }) =>
+  const getClassName = ({ isActive }: { isActive: boolean }): string =>
     isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
 
   return (
@@ -42,4 +43,4 @@ function Header() {
   );
 }
 
-export default Header
+export default Header;

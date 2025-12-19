@@ -1,7 +1,8 @@
 import styles from './Footer.module.css';
 import { useTheme } from '../../shared/lib/theme/useTheme';
+import type { ReactElement } from 'react';
 
-function Footer() {
+function Footer(): ReactElement {
   const { theme } = useTheme();
   return (
     <div className={`${styles.footer} ${theme}`}>

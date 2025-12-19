@@ -1,9 +1,11 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetPostByIdQuery } from '../entities/posts/api/postsApi';
 import CommentList from '../widgets/CommentList/ui/CommentList';
+import type { Post } from '../entities/posts/model/types';
 
-function PostDetailPage() {
+function PostDetailPage(): ReactElement {
   const { id } = useParams<{ id: string }>();
 
   const { data: post, isLoading, error } = useGetPostByIdQuery(Number(id));
@@ -20,11 +22,13 @@ function PostDetailPage() {
     return <p>Пост не найден</p>;
   }
 
+  const typedPost: Post = post;
+
   return (
     <div>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
-      <CommentList postId={post.id} />
+      <h2>{typedPost.title}</h2>
+      <p>{typedPost.body}</p>
+      <CommentList postId={typedPost.id} />
     </div>
   );
 }
