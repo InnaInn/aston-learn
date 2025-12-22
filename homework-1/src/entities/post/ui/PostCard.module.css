@@ -1,0 +1,23 @@
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  margin-top: 0;
+  color: #34495e;
+}
+
+.cardDescription {
+  color: #7f8c8d;
+}
