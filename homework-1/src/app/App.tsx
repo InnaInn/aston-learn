@@ -5,6 +5,7 @@ import Footer from '../widgets/LayoutFooter/Footer';
 import PostList from '../widgets/PostList/PostList';
 import withLoading from '../shared/lib/hoc/withLoading';
 import PostLengthFilter from '../features/PostLengthFilter/ui/PostLengthFilter';
+import AppRouter from './providers/router/AppRouter';
 
 const PostListWithLoading = withLoading(PostList);
 
@@ -51,12 +52,13 @@ function App() {
   return (
     <MainLayout>
       <Header />
+      <AppRouter></AppRouter>
       {!loading && (
-    <PostLengthFilter
-      posts={myPosts}
-      onFilter={(filtered) => setFilteredPosts(filtered)}
-    />
-  )}
+        <PostLengthFilter
+          posts={myPosts}
+          onFilter={(filtered) => setFilteredPosts(filtered)}
+        />
+      )}
       <PostListWithLoading isLoading={loading} posts={filteredPosts} />
       <Footer />
     </MainLayout>
