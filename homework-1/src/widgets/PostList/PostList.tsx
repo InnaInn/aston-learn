@@ -1,25 +1,37 @@
+import React, { useCallback } from 'react';
 import PostCard from '../../entities/post/ui/PostCard';
 import styles from './PostList.module.css';
-import React from 'react';
+
+type Comment = {
+  id: number;
+  text: string;
+};
+
+type Post = {
+  id: string;
+  title: string;
+  description: string;
+  comments: Comment[];
+};
 
 type PostListProps = {
-  posts: {
-    id: string;
-    title: string;
-    description: string;
-  }[];
+  posts: Post[];
 };
 
 function PostList({ posts }: PostListProps) {
+  const handleClick = useCallback((id: string) => {
+    console.log(`Клик по посту: ${id}`);
+  }, []);
+
   return (
     <div className={styles.listCards}>
       {posts.map((post) => (
-        <React.Fragment key={post.id}>
+        <div key={post.id} onClick={() => handleClick(post.id)}>
           <PostCard post={post} />
-        </React.Fragment>
+        </div>
       ))}
     </div>
   );
 }
 
-export default PostList;
+export default React.memo(PostList);

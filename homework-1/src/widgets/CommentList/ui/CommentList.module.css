@@ -1,0 +1,40 @@
+.wrapper {
+  margin-top: 10px;
+}
+
+.buttonShowComment {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 12px;
+  transition: background-color 0.2s ease;
+}
+
+.buttonShowComment:hover {
+  background-color: #0056b3;
+}
+
+.commentList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commentItem {
+  display: flex;
+  align-items: flex-start;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+
+.text {
+  margin: 0;
+  font-size: 14px;
+}

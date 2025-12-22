@@ -5,7 +5,6 @@ import Button from '../../shared/ui/Button';
 import Modal from '../../shared/ui/Modal';
 import React, { useState } from 'react';
 
-
 function Header() {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +21,13 @@ function Header() {
       </div>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <p>Это учебный проект для практики  React.</p>
+        <Modal.Header>О проекте</Modal.Header>
+        <Modal.Body>
+          <p>Это модальное окно для практики React Portal и Compound Components.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setIsOpen(false)}>Закрыть</Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
