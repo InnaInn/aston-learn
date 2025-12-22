@@ -1,5 +1,6 @@
 import React from 'react';
 import usePosts from '../features/PostList/model/hooks/usePosts';
+import UserTabs from '../widgets/UserTabs/UserTabs';
 
 function PostsPage() {
   const { posts, loading, error } = usePosts();
@@ -9,6 +10,7 @@ function PostsPage() {
 
   return (
     <div>
+       <UserTabs />
       <h2>Список постов</h2>
       <ul>
         {posts.map((post) => (
