@@ -1,7 +1,10 @@
 .listCards {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch; 
+  margin: 0 auto;       
+  max-width: 900px;      
   margin-bottom: 80px;
   gap: 24px;
 }
+
