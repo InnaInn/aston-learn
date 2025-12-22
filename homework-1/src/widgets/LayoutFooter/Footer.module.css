@@ -6,5 +6,15 @@
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
   margin-top: auto;
   font-size: 14px;
-  border-top: 1px solid #e0e0e0;
+
+}
+
+:global(.dark) .footer {
+  background-color: #000;
+  color: #fff;
+}
+
+:global(.light) .footer {
+  background-color: #2196F3;
+  color: #fff;
 }

@@ -14,6 +14,7 @@ function PostCard({ post }: PostCardProps) {
       <h3 className={styles.cardTitle}>{post.title}</h3>
       <p className={styles.cardDescription}>{post.description}</p>
     </div>
+
   );
 }
 

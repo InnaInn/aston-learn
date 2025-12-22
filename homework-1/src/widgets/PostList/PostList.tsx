@@ -1,5 +1,6 @@
 import PostCard from '../../entities/post/ui/PostCard';
 import styles from './PostList.module.css';
+import React from 'react';
 
 type PostListProps = {
   posts: {
@@ -13,7 +14,9 @@ function PostList({ posts }: PostListProps) {
   return (
     <div className={styles.listCards}>
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <React.Fragment key={post.id}>
+          <PostCard post={post} />
+        </React.Fragment>
       ))}
     </div>
   );
